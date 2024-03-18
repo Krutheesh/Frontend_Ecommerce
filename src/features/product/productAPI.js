@@ -1,6 +1,6 @@
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/products/" + id, { credentials: "include" });
+    const response = await fetch("/products/" + id);
     const data = await response.json();
     resolve({ data });
   });
@@ -8,11 +8,10 @@ export function fetchProductById(id) {
 
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/products/", {
+    const response = await fetch("/products/", {
       method: "POST",
       body: JSON.stringify(product),
       headers: { "content-type": "application/json" },
-      credentials: "include",
     });
     const data = await response.json();
     resolve({ data });
@@ -21,11 +20,10 @@ export function createProduct(product) {
 
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/products/" + update.id, {
+    const response = await fetch("/products/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: { "content-type": "application/json" },
-      credentials: "include",
     });
     const data = await response.json();
     resolve({ data });
@@ -55,9 +53,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
   }
 
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/products?" + queryString, {
-      credentials: "include",
-    });
+    const response = await fetch("/products?" + queryString);
     console.log(response);
     const data = await response.json();
     console.log(data);
@@ -68,7 +64,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
 export function fetchCategories() {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/categories", { credentials: "include" });
+    const response = await fetch("/categories", { credentials: "include" });
     const data = await response.json();
     resolve({ data });
   });
@@ -76,7 +72,7 @@ export function fetchCategories() {
 
 export function fetchBrands() {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/brands", { credentials: "include" });
+    const response = await fetch("/brands", { credentials: "include" });
     const data = await response.json();
     resolve({ data });
   });

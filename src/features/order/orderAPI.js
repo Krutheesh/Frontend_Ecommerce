@@ -1,10 +1,9 @@
 export function createOrder(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/orders", {
+    const response = await fetch("/orders", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
-      credentials: "include",
     });
     const data = await response.json();
     resolve({ data });
@@ -13,11 +12,10 @@ export function createOrder(order) {
 
 export function updateOrder(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/orders/" + order.id, {
+    const response = await fetch("/orders/" + order.id, {
       method: "PATCH",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
-      credentials: "include",
     });
     const data = await response.json();
     resolve({ data });
@@ -35,9 +33,7 @@ export function fetchAllOrders(sort, pagination) {
   }
 
   return new Promise(async (resolve) => {
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/orders?" + queryString, {
-      credentials: "include",
-    });
+    const response = await fetch("/orders?" + queryString);
     const data = await response.json();
     const totalOrders = await response.headers.get("X-Total-Count");
     resolve({ data: { orders: data, totalOrders: +totalOrders } });
