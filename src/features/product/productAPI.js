@@ -64,7 +64,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
 export function fetchCategories() {
   return new Promise(async (resolve) => {
-    const response = await fetch("/categories", { credentials: "include" });
+    const response = await fetch("/categories");
     const data = await response.json();
     resolve({ data });
   });
@@ -72,7 +72,7 @@ export function fetchCategories() {
 
 export function fetchBrands() {
   return new Promise(async (resolve) => {
-    const response = await fetch("/brands", { credentials: "include" });
+    const response = await fetch("/brands");
     const data = await response.json();
     resolve({ data });
   });
