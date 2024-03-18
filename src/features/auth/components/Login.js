@@ -33,7 +33,7 @@ export default function Login() {
           <form
             noValidate
             onSubmit={handleSubmit((data) => {
-              console.log(process.env.REACT_APP_BACKEND_URL);
+              // console.log(process.env.REACT_APP_BACKEND_URL);
               dispatch(
                 loginUserAsync({ email: data.email, password: data.password })
               );

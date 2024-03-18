@@ -1,13 +1,11 @@
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch(
-      process.env.REACT_APP_BACKEND_URL + "/auth/signup",
-      {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: { "content-type": "application/json" },
-      }
-    );
+    const response = await fetch( process.env.REACT_APP_BACKEND_URL+"/auth/signup", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: { "content-type": "application/json" },
+      credentials: "include",
+    });
     const data = await response.json();
     resolve({ data });
   });
@@ -16,22 +14,16 @@ export function createUser(userData) {
 export function loginUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(
-      process.env.REACT_APP_BACKEND_URL+ "/auth/login",
-        {
-          method: "POST",
-          body: JSON.stringify(loginInfo),
-          headers: { "content-type": "application/json" },
-       
-          credentials:"include"
-          
-          
-        },
-      );
-     
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/auth/login", {
+        method: "POST",
+        body: JSON.stringify(loginInfo),
+        headers: { "content-type": "application/json" },
+        credentials: "include",
+      });
+
       if (response.ok) {
         const data = await response.json();
-        
+
         resolve({ data });
       } else {
         const error = await response.text();
@@ -46,12 +38,10 @@ export function loginUser(loginInfo) {
 export function checkAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "/auth/check"
-      );
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/auth/check", { credentials: "include" });
 
       // error comes sometimes due to path change in index.js set for vercel
-     console.log(response.ok)
+      console.log(response.ok);
       if (response.ok) {
         const data = await response.json();
         resolve({ data });
@@ -69,9 +59,7 @@ export function checkAuth() {
 export function signOut(userId) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "/auth/logout"
-      );
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/auth/logout");
       if (response.ok) {
         resolve({ data: "success" });
       } else {
@@ -88,14 +76,11 @@ export function signOut(userId) {
 export function resetPasswordRequest(email) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(
-        process.env.REACT_APP_BACKEND_URL + "/auth/reset-password-request",
-        {
-          method: "POST",
-          body: JSON.stringify({ email }),
-          headers: { "content-type": "application/json" },
-        }
-      );
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/auth/reset-password-request", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+        headers: { "content-type": "application/json" },
+      });
       if (response.ok) {
         const data = await response.json();
         resolve({ data });
@@ -112,14 +97,11 @@ export function resetPasswordRequest(email) {
 export function resetPassword(data) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(
-        "process.env.REACT_APP_BACKEND_URL+/auth/reset-password",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: { "content-type": "application/json" },
-        }
-      );
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL+"/auth/reset-password", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "content-type": "application/json" },
+      });
       if (response.ok) {
         const data = await response.json();
         resolve({ data });
